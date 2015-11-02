@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-const static int MAX_INPUT_SIZE = 2048;
+/* I am intentionally not doing the Windows portability stuff here
+ since I am doing this for the language-implementation aspect,
+ rather than the portability aspect. If it turns out the portability
+ stuff is a big deal, I will come back and add in that code. -MAW */
 
-/* input buffer */
-static char input[MAX_INPUT_SIZE];
+#include <editline/readline.h>
 
 int main(int argc, char **argv) {
 
@@ -13,12 +16,15 @@ int main(int argc, char **argv) {
 
     while(1) {
         /* prompt: */
-        fputs("lispy> ", stdout);
+        char *input = readline("lispy> ");
 
-        /* read a line of user input; max size == MAX_INPUT_SIZE */
-        fgets(input, MAX_INPUT_SIZE, stdin);
+        /* add input to command history */
+        add_history(input);
 
-        printf("No, you're a %s", input);
+        printf("No, you're a %s\n", input);
+
+        /* input was dynamically allocated */
+        free(input);
     }
     return 0;
 }
