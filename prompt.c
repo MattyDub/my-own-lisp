@@ -6,6 +6,9 @@
  rather than the portability aspect. If it turns out the portability
  stuff is a big deal, I will come back and add in that code. -MAW */
 
+/* Fun SO link on target platform detection:
+   http://stackoverflow.com/a/5920028/3435397 */
+
 #include <editline/readline.h>
 
 int main(int argc, char **argv) {
